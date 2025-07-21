@@ -9,7 +9,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-# Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format='[%(asctime)s] %(levelname)s - %(message)s',
@@ -25,10 +24,8 @@ nltk.download('punkt')
 nltk.download('punkt_tab')
 nltk.download('stopwords')
 
-# Text cleaning
 stop_words = set(stopwords.words('english'))
 
-# Load and sample dataset
 try:
     df = pd.read_csv("movies.csv")
     logging.info("✅ Dataset loaded successfully. Total rows: %d", len(df))
@@ -44,7 +41,6 @@ def preprocess_text(text):
     return " ".join(tokens)
 
 
-# filter the required columns for recommendation
 required_columns = ["genres", "keywords", "overview", "title"]
 
 df = df[required_columns]
@@ -58,18 +54,15 @@ df['cleaned_text'] = df['combined'].apply(preprocess_text)
 logging.info("✅ Text cleaned.")
 
 
-# Vectorization
 logging.info("🔠 Vectorizing using TF-IDF...")
 tfidf = TfidfVectorizer(max_features=5000)
 tfidf_matrix = tfidf.fit_transform(df['cleaned_text'])
 logging.info("✅ TF-IDF matrix shape: %s", tfidf_matrix.shape)
 
-# Cosine similarity
 logging.info("📐 Calculating cosine similarity...")
 cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
 logging.info("✅ Cosine similarity matrix generated.")
 
-# Save everything
 joblib.dump(df, 'df_cleaned.pkl')
 joblib.dump(tfidf_matrix, 'tfidf_matrix.pkl')
 joblib.dump(cosine_sim, 'cosine_sim.pkl')

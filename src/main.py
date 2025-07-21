@@ -1,19 +1,19 @@
 import streamlit as st
-from recommend import df, recommend_movies
+from recommendations import df, recommend_movies
 from omdb_utils import get_movie_details
 
 
 
 st.set_page_config(
-    page_title="Movie Recommender",
+    page_title="Movie Recommendation System",
     page_icon="🎬",
     layout="centered"
 )
 
-st.title("🎬 Movie Recommender")
+st.title("🎬 Movie Recommendation System")
 
 movie_list = sorted(df['title'].dropna().unique())
-selected_movie = st.selectbox("🎬 Select a movie:", movie_list)
+selected_movie = st.selectbox("🎬 Select the movie you have just watched:", movie_list)
 
 if st.button("🚀 Recommend Similar Movies"):
     with st.spinner("Finding similar movies..."):

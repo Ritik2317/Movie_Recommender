@@ -1,7 +1,6 @@
 import joblib
 import logging
 
-# Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format='[%(asctime)s] %(levelname)s - %(message)s',
@@ -32,9 +31,8 @@ def recommend_movies(movie_name, top_n=10):
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)[1:top_n + 1]
     movie_indices = [i[0] for i in sim_scores]
     logging.info("✅ Top %d recommendations ready.", top_n)
-    # Create DataFrame with clean serial numbers starting from 1
     result_df = df[['title']].iloc[movie_indices].reset_index(drop=True)
-    result_df.index = result_df.index + 1  # Start from 1 instead of 0
+    result_df.index = result_df.index + 1  
     result_df.index.name = "S.No."
 
     return result_df
