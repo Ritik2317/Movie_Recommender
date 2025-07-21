@@ -1,6 +1,6 @@
 # 🎬 Movie Recommender App
 
-A simple, interactive web app built using **Streamlit** that recommends movies based on user input. The app also fetches movie details like poster, genre, IMDb rating, etc., using the OMDb API.
+A simple, interactive web app built using **Streamlit** that recommends movies based on user input. The app also fetches movie details like poster, plot etc., using the OMDb API.
 
 ---
 
