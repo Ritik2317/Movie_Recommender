@@ -1,0 +1,2 @@
+python preprocessing.py
+python -m streamlit run main.py
